@@ -1,14 +1,19 @@
 using Microsoft.AspNetCore.Mvc;
+using MvcShop.Domain.Models;
+using MvcShop.Infrastructure.Repositories;
 using MvcShop.Web.Models;
 using System.Diagnostics;
 
 namespace MvcShop.Web.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController(IRepository<Product> productRepository) : Controller
     {
+        private readonly IRepository<Product> _productRepository = productRepository;
+
         public IActionResult Index()
         {
-            return View();
+            var products = _productRepository.GetAll();
+            return View(products);
         }
 
         public IActionResult Privacy()

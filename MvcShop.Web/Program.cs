@@ -1,4 +1,6 @@
+using MvcShop.Domain.Models;
 using MvcShop.Infrastructure.Data;
+using MvcShop.Infrastructure.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -6,6 +8,11 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<MvcShopContext>(ServiceLifetime.Scoped);
+builder.Services.AddTransient<IRepository<Customer>, CustomerRepository>();
+builder.Services.AddTransient<IRepository<Product>, ProductRepository>();
+builder.Services.AddTransient<IRepository<Order>, OrderRepository>();
+builder.Services.AddTransient<IRepository<Cart>, CartRepository>();
+builder.Services.AddTransient<ICartRepository, CartRepository>();
 
 var app = builder.Build();
 
