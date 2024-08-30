@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="400" height="250" viewBox="0 0 400 250" xml:space="preserve">
+<desc>Created with Fabric.js 5.2.4</desc>
+<defs>
+</defs>
+<rect x="0" y="0" width="100%" height="100%" fill="transparent"></rect>
+<g transform="matrix(0 0 0 0 0 0)" id="467dce99-6ffd-4d44-857a-a584af0fe12b"  >
+</g>
+<g transform="matrix(1 0 0 1 200 125)" id="6a5bd78a-c43b-4bcd-82d3-e08022d95872"  >
+<rect style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(28,28,29); fill-opacity: 0; fill-rule: nonzero; opacity: 1;" vector-effect="non-scaling-stroke"  x="-200" y="-125" rx="0" ry="0" width="400" height="250" />
+</g>
+<g transform="matrix(0.24 0 0 0.24 200 97.1)" style="" id="d1fc0ccc-497f-4756-a8f9-db385ed540e0"  >
+		<text xml:space="preserve" font-family="Alegreya" font-size="200" font-style="normal" font-weight="600" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(255,255,255); fill-rule: nonzero; opacity: 1; white-space: pre;" ><tspan x="-410.7" y="62.83" >M</tspan><tspan x="-237.1" y="62.83" >v</tspan><tspan x="-137.5" y="62.83" >c</tspan><tspan x="-42.3" y="62.83" >S</tspan><tspan x="73.5" y="62.83" >h</tspan><tspan x="191.1" y="62.83" >o</tspan><tspan x="303.3" y="62.83" >p</tspan></text>
+</g>
+<g transform="matrix(0.24 0 0 0.24 200 149)" style="" id="187d78b3-3328-4bc8-9680-ea3330ce7205"  >
+		<text xml:space="preserve" font-family="Lato" font-size="93" font-style="normal" font-weight="100" text-decoration="overline" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(255,255,255); fill-rule: nonzero; opacity: 1; white-space: pre;" ><tspan x="-324.8" y="29.22" >a mvc deep dive</tspan></text>
+</g>
+</svg>

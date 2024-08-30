@@ -22,4 +22,8 @@
     <ProjectReference Include="..\MvcShop.Infrastructure\MvcShop.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\img\" />
+  </ItemGroup>
+
 </Project>
