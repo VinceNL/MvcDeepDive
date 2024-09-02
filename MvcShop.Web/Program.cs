@@ -1,8 +1,16 @@
 using MvcShop.Domain.Models;
 using MvcShop.Infrastructure.Data;
 using MvcShop.Infrastructure.Repositories;
+using MvcShop.Web.Constraints;
+using MvcShop.Web.Transformer;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddRouting(options =>
+{
+    options.ConstraintMap["validateSlug"] = typeof(SlugConstraint);
+    options.ConstraintMap["slugTransform"] = typeof(SlugParameterTransformer);
+});
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -28,6 +36,11 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+
+//app.MapControllerRoute(
+//    name: "TicketDetailsRoute",
+//    defaults: new { action = "TicketDetails", controller = "Home" },
+//    pattern: "/details/{productId}/{slug?}");
 
 app.MapControllerRoute(
     name: "default",
