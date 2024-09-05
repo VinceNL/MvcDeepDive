@@ -3,6 +3,6 @@
     public class UpdateQuantitiesModel
     {
         public Guid? CartId { get; set; }
-        public IEnumerable<ProductModel> Products { get; set; }
+        public required IEnumerable<ProductModel> Products { get; set; }
     }
 }

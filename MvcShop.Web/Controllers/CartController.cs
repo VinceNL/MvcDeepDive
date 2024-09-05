@@ -10,13 +10,12 @@ namespace MvcShop.Web.Controllers
         ILogger<CartController> logger,
         ICartRepository cartRepository,
         IRepository<Customer> customerRepository,
-        IRepository<Order> orderRepository) : Controller
+        IRepository<Order> orderRepository,
+        IStateRepository stateRepository) : Controller
     {
-        private readonly ILogger<CartController> _logger = logger;
-        private readonly ICartRepository _cartRepository = cartRepository;
         private readonly IRepository<Customer> _customerRepository = customerRepository;
         private readonly IRepository<Order> _orderRepository = orderRepository;
-        //private readonly IStateRepository _stateRepository = stateRepository;
+        private readonly IStateRepository _stateRepository = stateRepository;
 
         public IActionResult Index(Guid? id)
         {
@@ -32,15 +31,21 @@ namespace MvcShop.Web.Controllers
                 return BadRequest();
             }
 
-            _logger.LogInformation($"Adding products " +
+            logger.LogInformation($"Adding products " +
                 $"{addToCartModel.Product.ProductId} to cart " +
                 $"{addToCartModel.CartId}");
 
-            var cart = _cartRepository.CreateOrUpdate(addToCartModel.CartId,
+            var cart = cartRepository.CreateOrUpdate(addToCartModel.CartId,
                 addToCartModel.Product.ProductId,
                 addToCartModel.Product.Quantity);
 
-            _cartRepository.SaveChanges();
+            cartRepository.SaveChanges();
+
+            _stateRepository.SetValue("NumberOfItems",
+                cart.LineItems.Sum(x => x.Quantity).ToString());
+
+            _stateRepository.SetValue("CartId",
+                cart.CartId.ToString());
 
             return RedirectToAction("Index", "Cart");
         }
@@ -65,7 +70,13 @@ namespace MvcShop.Web.Controllers
                     product.ProductId, product.Quantity);
             }
 
-            _cartRepository.SaveChanges();
+            cartRepository.SaveChanges();
+
+            _stateRepository.SetValue("NumberOfItems",
+                cart.LineItems.Sum(x => x.Quantity).ToString());
+
+            _stateRepository.SetValue("CartId",
+                cart.CartId.ToString());
 
             return RedirectToAction("Index", "Cart");
      
@@ -107,7 +118,7 @@ namespace MvcShop.Web.Controllers
                 PostalCode = createOrderModel.Customer.PostalCode,
             };
 
-            _logger.LogInformation($"Creating new order for {customer.CustomerId}");
+            logger.LogInformation($"Creating new order for {customer.CustomerId}");
 
             _customerRepository.Add(customer);
 
@@ -123,7 +134,7 @@ namespace MvcShop.Web.Controllers
                 return View("Index");
             }
 
-            var cart = _cartRepository.Get(createOrderModel.CartId.Value);
+            var cart = cartRepository.Get(createOrderModel.CartId.Value);
 
             if (cart is null)
             {
@@ -138,13 +149,13 @@ namespace MvcShop.Web.Controllers
             }
 
             _orderRepository.Add(order);
-            _cartRepository.Update(cart);
-            _cartRepository.SaveChanges();
+            cartRepository.Update(cart);
+            cartRepository.SaveChanges();
 
-            _logger.LogInformation($"Order placed for {customer.CustomerId}");
+            logger.LogInformation($"Order placed for {customer.CustomerId}");
 
-            //_stateRepository.Remove("NumberOfItems");
-            //_stateRepository.Remove("CartId");
+            _stateRepository.Remove("NumberOfItems");
+            _stateRepository.Remove("CartId");
 
             return RedirectToAction("ThankYou");
         }

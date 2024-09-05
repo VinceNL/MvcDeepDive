@@ -2,9 +2,20 @@ using MvcShop.Domain.Models;
 using MvcShop.Infrastructure.Data;
 using MvcShop.Infrastructure.Repositories;
 using MvcShop.Web.Constraints;
+using MvcShop.Web.Repositories;
 using MvcShop.Web.Transformer;
+using MvcShop.Web.ValueProviders;
 
 var builder = WebApplication.CreateBuilder(args);
+
+/// TODO: Use this when following along in the last Module
+//builder.Services.AddStackExchangeRedisCache(options =>
+//{
+//    options.Configuration = builder.Configuration.GetConnectionString("MyRedisConStr");
+//    options.InstanceName = "SampleInstance";
+//});
+
+builder.Services.AddSession();
 
 builder.Services.AddRouting(options =>
 {
@@ -13,9 +24,14 @@ builder.Services.AddRouting(options =>
 });
 
 // Add services to the container.
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews(options =>
+    options.ValueProviderFactories.Add(new SessionValueProviderFactory())
+);
 
+builder.Services.AddHttpContextAccessor();
 builder.Services.AddDbContext<MvcShopContext>(ServiceLifetime.Scoped);
+
+builder.Services.AddTransient<IStateRepository, SessionStateRepository>();
 builder.Services.AddTransient<IRepository<Customer>, CustomerRepository>();
 builder.Services.AddTransient<IRepository<Product>, ProductRepository>();
 builder.Services.AddTransient<IRepository<Order>, OrderRepository>();
@@ -36,6 +52,8 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+
+app.UseSession();
 
 //app.MapControllerRoute(
 //    name: "TicketDetailsRoute",

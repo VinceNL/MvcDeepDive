@@ -1,4 +1,6 @@
 ﻿@using MvcShop.Domain.Models;
+@using MvcShop.Infrastructure.Repositories
+@inject IStateRepository stateRepository
 
 @model Cart
 @{
@@ -8,7 +10,10 @@
     <div class="col-md-9">
         <div class="card">
             <div class="card-body">
-                TBA - Shopping cart
+                @await Component.InvokeAsync("ShoppingCart", new {
+                    cartId = stateRepository.GetValue("CartId"),
+                    isCompact = false
+                })
             </div>
         </div>
     </div>

@@ -1,4 +1,7 @@
-﻿@{
+﻿@using MvcShop.Infrastructure.Repositories
+@inject IStateRepository stateRepository
+
+@{
     ViewData["Title"] = "Home";
 }
 
@@ -14,7 +17,11 @@
     <div class="col-sm-5">
         <div class="card">
             <div class="card-body">
-                TBA: Shopping Cart
+                @await Component.InvokeAsync("ShoppingCart", new
+                    {
+                        cartId = stateRepository.GetValue("CartId"),
+                        isCompact = true
+                    })
             </div>
         </div>
     </div>
