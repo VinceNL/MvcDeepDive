@@ -2,15 +2,10 @@
 
 namespace MvcShop.Infrastructure.Repositories
 {
-    public abstract class GenericRepository<T>
+    public abstract class GenericRepository<T>(MvcShopContext context)
         : IRepository<T> where T : class
     {
-        protected MvcShopContext _context;
-
-        public GenericRepository(MvcShopContext context)
-        {
-            _context = context;
-        }
+        protected MvcShopContext _context = context;
 
         public virtual T Add(T entity)
         {
@@ -18,23 +13,23 @@ namespace MvcShop.Infrastructure.Repositories
             return addedEntity;
         }
 
-        public T? Get(Guid id)
+        public virtual T? Get(Guid id)
         {
             return _context.Find<T>(id);
         }
 
-        public IEnumerable<T> GetAll()
+        public virtual IEnumerable<T> GetAll()
         {
             var all = _context.Set<T>().ToList();
             return all;
         }
 
-        public void SaveChanges()
+        public virtual void SaveChanges()
         {
             _context.SaveChanges();
         }
 
-        public T Update(T entity)
+        public virtual T Update(T entity)
         {
             return _context.Update(entity).Entity;
         }

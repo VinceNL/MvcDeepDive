@@ -2,7 +2,7 @@
 
 namespace MvcShop.Infrastructure.Repositories
 {
-    public interface ICartRepository
+    public interface ICartRepository : IRepository<Cart>
     {
         Cart CreateOrUpdate(Guid? cartId, Guid productId, int quantity = 1);
     }
