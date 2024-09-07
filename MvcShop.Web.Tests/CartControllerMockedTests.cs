@@ -85,7 +85,7 @@ namespace MvcShop.Web.Tests
         public void Update_ProductsIsNull_ReturnsBadRequest()
         {
             // Arrange
-            var model = new UpdateQuantitiesModel { Products = null };
+            var model = new UpdateQuantitiesModel { Products = null! };
 
             // Act
             var result = _controller.Update(model);
@@ -120,7 +120,7 @@ namespace MvcShop.Web.Tests
         public void Create_CustomerIsNull_ReturnsViewWithModelError()
         {
             // Arrange
-            var model = new CreateOrderModel { Customer = null };
+            var model = new CreateOrderModel { Customer = null! };
 
             // Act
             var result = _controller.Create(model);
