@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using MvcShop.Domain.Models;
 using MvcShop.Infrastructure.Repositories;
+using MvcShop.Web.Attributes;
+using MvcShop.Web.Filters;
 using MvcShop.Web.Models;
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
@@ -12,19 +14,11 @@ namespace MvcShop.Web.Controllers
         private readonly ILogger<HomeController> _logger = logger;
         private readonly IRepository<Product> _productRepository = productRepository;
 
+        [TimerFilter]
+        //[ServiceFilter(typeof(TimerFilter))]
         public IActionResult Index()
         {
-            try
-            {
-                var products = _productRepository.GetAll();
-                return View(products);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, $"Could not load products");
-            }
-
-            return Error();
+            return View();
         }
 
         [Route("/details/{productId:guid}/{slug:slugTransform}")]

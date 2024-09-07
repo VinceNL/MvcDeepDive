@@ -1,7 +1,9 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using MvcShop.Domain.Models;
 using MvcShop.Infrastructure.Data;
 using MvcShop.Infrastructure.Repositories;
 using MvcShop.Web.Constraints;
+using MvcShop.Web.Filters;
 using MvcShop.Web.Repositories;
 using MvcShop.Web.Transformer;
 using MvcShop.Web.ValueProviders;
@@ -14,6 +16,14 @@ var builder = WebApplication.CreateBuilder(args);
 //    options.Configuration = builder.Configuration.GetConnectionString("MyRedisConStr");
 //    options.InstanceName = "SampleInstance";
 //});
+
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options =>
+    {
+        options.ExpireTimeSpan = TimeSpan.FromMinutes(30);
+        options.SlidingExpiration = true;
+        options.LoginPath = "/Login";
+    });
 
 builder.Services.AddSession();
 
@@ -38,6 +48,9 @@ builder.Services.AddTransient<IRepository<Order>, OrderRepository>();
 builder.Services.AddTransient<IRepository<Cart>, CartRepository>();
 builder.Services.AddTransient<ICartRepository, CartRepository>();
 
+// Replaced by TimerFilter Attribute
+//builder.Services.AddScoped<TimerFilter>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -52,6 +65,9 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.UseSession();
 
