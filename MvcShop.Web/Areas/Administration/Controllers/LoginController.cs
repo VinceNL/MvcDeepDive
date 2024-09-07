@@ -5,8 +5,9 @@ using Microsoft.AspNetCore.Mvc;
 using MvcShop.Web.Models;
 using System.Security.Claims;
 
-namespace MvcShop.Web
+namespace MvcShop.Web.Areas.Administration.Controllers
 {
+    [Area("Administration")]
     public class LoginController : Controller
     {
         [Route("/login")]
@@ -38,7 +39,7 @@ namespace MvcShop.Web
                 return RedirectToAction("Index", "Customers");
             }
 
-            return View();
+            return View("UnkownAdmin");
         }
 
         [AllowAnonymous]

@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvcShop.Infrastructure", "M
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvcShop.Web", "MvcShop.Web\MvcShop.Web.csproj", "{8908D5BA-83E4-4FA0-9D70-6EED4346E52A}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvcShop.Web.Tests", "MvcShop.Web.Tests\MvcShop.Web.Tests.csproj", "{C80D220D-55B2-402F-966C-92213D1873F1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{8908D5BA-83E4-4FA0-9D70-6EED4346E52A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8908D5BA-83E4-4FA0-9D70-6EED4346E52A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8908D5BA-83E4-4FA0-9D70-6EED4346E52A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C80D220D-55B2-402F-966C-92213D1873F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C80D220D-55B2-402F-966C-92213D1873F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C80D220D-55B2-402F-966C-92213D1873F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C80D220D-55B2-402F-966C-92213D1873F1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

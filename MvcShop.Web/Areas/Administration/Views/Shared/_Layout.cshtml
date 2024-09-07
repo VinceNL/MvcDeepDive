@@ -30,18 +30,17 @@
                         <li class="nav-item">
                             <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="Administration" asp-controller="Customers" asp-action="Index">Admin</a>
-                        </li>
                     </ul>
                     <div class="justify-content-end navbar-nav flex-grow-1">
                         <div class="header-cart justify-content-center">
                             <img src="~/img/cart.svg" />
 
-                            <p><span>
-                                @(stateRepository.GetValue("NumberOfItems") == string.Empty ? 0
-                                    : stateRepository.GetValue("NumberOfItems"));
-                            </span> tickets</p>
+                            <p>
+                                <span>
+                                    @(stateRepository.GetValue("NumberOfItems") == string.Empty ? 0
+                                        : stateRepository.GetValue("NumberOfItems"));
+                                </span> tickets
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -50,7 +49,7 @@
     </header>
     <div class="container">
         <main role="main" class="pb-3 bg">
-            @RenderBody() 
+            @RenderBody()
         </main>
     </div>
 

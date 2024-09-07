@@ -3,19 +3,22 @@ using MvcShop.Domain.Models;
 using MvcShop.Infrastructure.Data;
 using MvcShop.Infrastructure.Repositories;
 using MvcShop.Web.Constraints;
-using MvcShop.Web.Filters;
 using MvcShop.Web.Repositories;
 using MvcShop.Web.Transformer;
 using MvcShop.Web.ValueProviders;
 
 var builder = WebApplication.CreateBuilder(args);
 
-/// TODO: Use this when following along in the last Module
+/// Example of setting a more scalable Cache solution (Redis)
 //builder.Services.AddStackExchangeRedisCache(options =>
 //{
 //    options.Configuration = builder.Configuration.GetConnectionString("MyRedisConStr");
 //    options.InstanceName = "SampleInstance";
 //});
+
+builder.Services.AddDistributedMemoryCache();
+
+builder.Services.AddSession();
 
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options =>
@@ -25,15 +28,12 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
         options.LoginPath = "/Login";
     });
 
-builder.Services.AddSession();
-
 builder.Services.AddRouting(options =>
 {
     options.ConstraintMap["validateSlug"] = typeof(SlugConstraint);
     options.ConstraintMap["slugTransform"] = typeof(SlugParameterTransformer);
 });
 
-// Add services to the container.
 builder.Services.AddControllersWithViews(options =>
     options.ValueProviderFactories.Add(new SessionValueProviderFactory())
 );
@@ -75,6 +75,15 @@ app.UseSession();
 //    name: "TicketDetailsRoute",
 //    defaults: new { action = "TicketDetails", controller = "Home" },
 //    pattern: "/details/{productId}/{slug?}");
+
+app.MapControllerRoute(
+    name: "administrationDefault",
+    defaults: new { controller = "Home" },
+    pattern: "{area:exists}/{action=Index}/{id?}");
+
+app.MapControllerRoute(
+    name: "administration",
+    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
 
 app.MapControllerRoute(
     name: "default",

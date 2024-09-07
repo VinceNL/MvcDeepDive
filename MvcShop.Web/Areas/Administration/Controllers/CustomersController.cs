@@ -4,8 +4,9 @@ using Microsoft.EntityFrameworkCore;
 using MvcShop.Domain.Models;
 using MvcShop.Infrastructure.Data;
 
-namespace MvcShop.Web
+namespace MvcShop.Web.Areas.Administration.Controllers
 {
+    [Area("Administration")]
     [Authorize]
     public class CustomersController : Controller
     {
